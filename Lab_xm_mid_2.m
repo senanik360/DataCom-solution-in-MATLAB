@@ -1,0 +1,30 @@
+clc;
+close all;
+A= 2;
+B= 0;
+C= 4;
+D= 2;
+E= 1;
+F= 3;
+G= 8;
+H= 1;
+a1 = G+3;
+a2 = G+5;
+a3 = G+4;
+f1 = G+1;
+f2 = G+9;
+f3 = G+7;
+L1 = 6;
+L2 = 14;
+fs = 700;
+t =0:1/fs:0.09;
+nx = length(t); 
+sig_ct = a1*sin(2*pi*f1*t) + a2*cos(2*pi*f2*t + pi/6) + a3*cos(2*pi*f3*t);
+partition = [-6.3100,-2.6550,1.0000, 4.6550 ,8.3100 ,11.9650 ,15.6200];
+codebook = linspace (-8.00,15.62,8);
+[index,quants] = quantiz(sig_ct,partition,codebook);
+figure;
+plot(t,sig_ct,'*',t,quants,'x')
+grid on;
+title('uniform quantization')
+legend('original signal','quantized signal');
